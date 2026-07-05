@@ -2,8 +2,12 @@
 
 A gesture-driven crypto pay button — press-and-hold to reveal an orbiting arc of coins, drag to hover, release to select — built for fintech and wallet apps.
 
-<!-- Replace with your own screen recording, uploaded the same way as expo-quick-pay's preview -->
-<img width="1280" height="720" alt="crypto-orbit" src="REPLACE_WITH_YOUR_PREVIEW_IMAGE_URL" />
+
+<img width="1280" height="720" alt="expo-crypto-orbit" src="https://github.com/user-attachments/assets/846c73b0-a886-44f6-8dc6-ea0efd20bb44" />
+
+
+
+
 
 ---
 
@@ -56,10 +60,37 @@ export function WalletScreen() {
 
 Ships with a built-in 5-coin starter set (SOL, BTC, ETH, ADA, BNB) and bundled icons — pass your own `coins` array to fully replace it.
 
+---
+
+## ⚠️ Important: Handling Selection
+
+`CryptoPaySelector` only calls `onSelect` once, on release, with the selected `Coin`.
+What happens next — navigation, a confirmation sheet, a store update — is entirely
+up to your app. The component has no built-in navigation or side effects.
+
+### Typical usage with Expo Router
+
+```tsx
+import { router } from 'expo-router'
+import CryptoPaySelector from './components/CryptoPaySelector'
+import type { Coin } from './constants/types'
+
+const handleSelect = (coin: Coin) => {
+  router.push({ pathname: '/send/[coinId]', params: { coinId: coin.id } })
+}
+
+<CryptoPaySelector onSelect={handleSelect} />
+```
+
+> **Note:** Route params are serialized to strings, so pass `coin.id` rather
+> than the full `Coin` object — re-resolve it from your coin list on the
+> destination screen.
+
+---
+
 ## Preview
 
-<!-- Replace with your own screen recording, uploaded the same way as expo-quick-pay's preview -->
-`REPLACE_WITH_YOUR_PREVIEW_VIDEO_URL`
+https://github.com/user-attachments/assets/5145e29f-f538-4614-a6c0-d840b00b8e1e
 
 ---
 
