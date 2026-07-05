@@ -41,3 +41,5 @@ yarn-error.*
 .claude/
 AGENTS.md
 CLAUDE.md
+
+expo-env.d.ts
